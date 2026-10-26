@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0a0a0a">
+<title>EC 250 Tracker</title>
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='96' fill='%230a0a0a'/%3E%3Ccircle cx='256' cy='240' r='140' fill='none' stroke='%23C8102E' stroke-width='24'/%3E%3Ccircle cx='256' cy='240' r='50' fill='%23C8102E'/%3E%3Cpath d='M256 76v-20M256 424v-20M116 240H96M416 240h-20M148 148l-14-14M378 368l-14-14M148 332l-14 14M378 112l-14 14' stroke='%23C8102E' stroke-width='20' stroke-linecap='round'/%3E%3Ctext x='256' y='460' text-anchor='middle' fill='%23C8102E' font-family='Arial Black' font-size='80' font-weight='900'%3EEC250%3C/text%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Bebas+Neue&family=Space+Mono:wght@400;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none}
+:root{--r:#C8102E;--bg:#0a0a0a;--c1:#141414;--c2:#1a1a1a;--b1:#222;--b2:#333;--g:#00aa55;--w:#ffaa00;--d:#ff4444}
+html{height:100%;overflow:hidden;-webkit-text-size-adjust:100%}
+body{font-family:'DM Mono',monospace;background:var(--bg);color:#e0e0e0;height:100%;display:flex;flex-direction:column;max-width:520px;margin:0 auto;overflow:hidden;-webkit-font-smoothing:antialiased;position:relative}
+input,select,button,textarea{font-family:inherit;outline:none;border:none;touch-action:manipulation;-webkit-appearance:none}
+button{cursor:pointer;touch-action:manipulation}
+select{-webkit-appearance:menulist}
+input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
+input[type=number]{-moz-appearance:textfield}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:#333;border-radius:2px}
+
+.hdr{background:linear-gradient(135deg,#1a0808,var(--bg));border-bottom:2px solid var(--r);padding:10px 16px 8px;padding-top:max(10px,env(safe-area-inset-top));flex-shrink:0}
+.logo{font-size:32px;font-family:'Bebas Neue',sans-serif;color:var(--r);letter-spacing:3px;line-height:1}
+.sub{font-size:10px;color:#666;letter-spacing:1.5px;margin-top:3px}
+.mrow{display:flex;gap:6px;margin-top:6px}
+.mbox{flex:1;background:var(--c2);border-radius:4px;padding:3px 8px;border:1px solid var(--b2)}
+.mlbl{font-size:8px;color:#666;letter-spacing:2px;display:block}
+.min{background:transparent;border:none;color:var(--r);font-family:'Bebas Neue',sans-serif;font-size:24px;width:100%;text-align:right;padding:0;line-height:1.1}
+.munit{font-size:9px;color:#555;text-align:right;display:block}
+.alrt{background:var(--d);color:#000;padding:4px 12px;font-size:10px;font-weight:700;letter-spacing:1px;margin:6px -16px 0;text-align:center;display:none}
+
+.tabs{display:grid;grid-template-columns:repeat(5,1fr);background:#111;border-bottom:1px solid var(--b1);flex-shrink:0;z-index:10}
+.tab{background:none;border:none;border-bottom:2px solid transparent;color:#555;padding:6px 2px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px}
+.tab.on{color:var(--r);border-bottom-color:var(--r)}
+.tab i{font-size:15px;font-style:normal}.tab span{font-size:9px;letter-spacing:1px;white-space:nowrap}
+
+.wrap{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+.pg{display:none;padding:12px 16px 90px;padding-bottom:max(90px,calc(80px + env(safe-area-inset-bottom)))}.pg.on{display:block}
+.sh{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.st{font-family:'Bebas Neue',sans-serif;font-size:16px;color:#777;letter-spacing:2px}
+.card{background:var(--c1);border-radius:6px;padding:10px;margin-bottom:5px;border-left:3px solid var(--b2)}
+.card.od{border-left-color:var(--d)}.card.sn{border-left-color:var(--w)}.card.red{border-left-color:var(--r)}.card.grn{border-left-color:var(--g)}
+.ctop{display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;gap:4px}
+.cn{font-size:13px;font-weight:600;color:#ddd;flex:1;line-height:1.3}
+.badge{font-size:9px;font-weight:700;padding:2px 6px;border-radius:3px;font-family:'Space Mono',monospace;background:#444;color:#aaa;white-space:nowrap}
+.badge.od{background:var(--d);color:#000}.badge.sn{background:var(--w);color:#000}
+.pbar{height:3px;background:var(--b1);border-radius:2px;overflow:hidden;margin-bottom:4px}
+.pfill{height:100%;border-radius:2px;background:var(--r);transition:width .4s}.pfill.od{background:var(--d)}.pfill.sn{background:var(--w)}
+.det{font-size:9px;color:#555;font-family:'Space Mono',monospace}
+.chips{display:flex;gap:4px;margin-top:3px;flex-wrap:wrap}
+.chip{background:var(--b1);color:#aaa;padding:2px 6px;border-radius:3px;font-size:10px;font-family:'Space Mono',monospace}
+.note{color:#666;font-size:11px;margin-top:4px;line-height:1.4}
+.fm{background:var(--c1);border:1px solid rgba(200,16,46,.15);border-radius:6px;padding:12px;margin-bottom:12px;display:none;flex-direction:column;gap:6px}
+.fm.on{display:flex}.fm.grn{border-color:rgba(0,170,85,.2)}
+.inp{background:var(--c2);border:1px solid var(--b2);color:#ddd;padding:9px 11px;border-radius:4px;font-size:13px;font-family:'DM Mono',monospace;width:100%}
+.inp:focus{border-color:var(--r)}
+.row{display:flex;gap:6px}
+.btn{background:var(--r);color:#fff;border:none;padding:9px 14px;border-radius:4px;font-size:12px;font-weight:700;cursor:pointer;letter-spacing:1.5px;font-family:'DM Mono',monospace;width:100%;text-align:center}
+.btn.grn{background:var(--g)}.btn.blue{background:#2266aa}
+.btns{background:var(--r);color:#fff;border:none;width:26px;height:26px;border-radius:13px;font-size:14px;cursor:pointer;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.btns.grn{background:var(--g)}
+.btnx{background:none;border:none;color:#555;cursor:pointer;font-size:14px;padding:2px}
+.btnh{padding:4px 8px;border-radius:3px;font-size:9px;font-weight:700;cursor:pointer;letter-spacing:1px;white-space:nowrap;border:none}
+.btnd{background:#331111;color:var(--d);border:1px solid rgba(255,68,68,.2);padding:7px 14px;border-radius:4px;font-size:10px;cursor:pointer;font-family:'DM Mono',monospace;font-weight:700;letter-spacing:1px}
+.frow{display:flex;gap:4px;margin-bottom:10px;flex-wrap:wrap}
+.fbtn{background:var(--c2);border:1px solid var(--b2);color:#666;padding:5px 10px;border-radius:4px;font-size:9px;cursor:pointer;font-family:'DM Mono',monospace;letter-spacing:1px}
+.fbtn.on{background:var(--r);color:#fff;border-color:var(--r)}
+.tqH{display:grid;grid-template-columns:1fr 46px 46px 46px;padding:5px 2px;border-bottom:1px solid var(--b1);font-size:8px;font-weight:700;color:#888}
+.tqR{display:grid;grid-template-columns:1fr 46px 46px 46px;padding:6px 2px;border-bottom:1px solid #111;align-items:center}
+.tqV{text-align:center;font-family:'Bebas Neue',sans-serif;font-size:15px;color:var(--r)}
+.tqV2{text-align:center;font-size:10px;color:#777;font-family:'Space Mono',monospace}
+.tqS{font-family:'Bebas Neue',sans-serif;font-size:14px;color:var(--r);letter-spacing:2px;margin:10px 0 4px;border-bottom:1px solid var(--b1);padding-bottom:3px}
+.sbox{flex:1;background:var(--c1);border-radius:6px;padding:8px;text-align:center}
+.sn{font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--r)}
+.sl{font-size:8px;color:#666;letter-spacing:1px}
+.bar{background:var(--r);border-radius:2px;min-height:4px;transition:width .3s}
+.empty{text-align:center;padding:24px;color:#444;font-size:13px}
+.btn-eye{background:none;border:none;font-size:16px;cursor:pointer;padding:2px 4px;opacity:.7}
+.btn-eye:active{opacity:1}
+.bkp{background:var(--c1);border-radius:6px;padding:12px;margin-top:16px}
+.bkp-title{font-family:'Bebas Neue',sans-serif;font-size:13px;color:#2266aa;letter-spacing:2px;margin-bottom:8px}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#222;color:#0f0;padding:8px 20px;border-radius:6px;font-size:11px;font-weight:700;z-index:99;display:none;letter-spacing:1px;border:1px solid #0f03}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+<div style="display:flex;justify-content:space-between;align-items:flex-start">
+<div><div class="logo">EC 250</div><div class="sub">GAS GAS 2024 · MAINTENANCE TRACKER</div></div>
+</div>
+<div class="mrow">
+<div class="mbox"><span class="mlbl">HORAS MOTOR</span><input type="number" class="min" id="hrs" step="0.1" value="0"><span class="munit">hs</span></div>
+<div class="mbox"><span class="mlbl">ODÓMETRO</span><input type="number" class="min" id="km" step="1" value="0"><span class="munit">km</span></div>
+</div>
+<div class="alrt" id="alrt"></div>
+</div>
+
+<div class="tabs">
+<button class="tab on" data-t="dash"><i>◉</i><span>ESTADO</span></button>
+<button class="tab" data-t="log"><i>▤</i><span>LOG</span></button>
+<button class="tab" data-t="hist"><i>◷</i><span>HISTORIAL</span></button>
+<button class="tab" data-t="mods"><i>◆</i><span>MEJORAS</span></button>
+<button class="tab" data-t="tq"><i>⚙</i><span>TORQUES</span></button>
+<button class="tab" data-t="proc"><i>🔧</i><span>PROCEDIM.</span></button>
+<button class="tab" data-t="codes"><i><svg width="18" height="15" viewBox="0 0 28 22" fill="currentColor"><path d="M5 6h2V4h4v2h6V4h4v2h2a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2v-3H1v-4h2V8a2 2 0 012-2zm1 3v6h16V9H6zm7 1v2h2v-2h-2zm-1 3h4v1h-4v-1z"/></svg></i><span>CÓDIGOS</span></button>
+<button class="tab" data-t="info"><i>▦</i><span>INFORME</span></button>
+<button class="tab" data-t="manual"><i>📖</i><span>MANUAL</span></button>
+<button class="tab" data-t="cfg"><i>☰</i><span>CONFIG</span></button>
+</div>
+
+<div class="wrap">
+<div class="pg on" id="pg-dash"><div class="sh"><h2 class="st">PRÓXIMOS SERVICIOS</h2></div><div id="dashL"></div></div>
+<div class="pg" id="pg-log"><div class="sh"><h2 class="st">REGISTRAR MANTENIMIENTO</h2><button class="btns" onclick="tgl('fLog',1)">+</button></div><div class="fm" id="fLog"><select class="inp" id="lSvc"><option value="">— Tipo de servicio —</option></select><input class="inp" id="lTask" placeholder="Tarea / descripción"><div class="row"><input class="inp" id="lHrs" type="number" step="0.1" placeholder="Horas" style="flex:1"><input class="inp" id="lKm" type="number" placeholder="Km" style="flex:1"></div><input class="inp" id="lDate" type="date"><input class="inp" id="lNotes" placeholder="Notas (opcional)"><button class="btn" onclick="addLog()">GUARDAR</button></div><div id="logL"></div></div>
+<div class="pg" id="pg-hist"><div class="sh"><h2 class="st">HISTORIAL COMPLETO</h2></div><div id="histL"></div></div>
+<div class="pg" id="pg-mods"><div class="sh"><h2 class="st">MODIFICACIONES / MEJORAS</h2><button class="btns grn" onclick="tgl('fMod',1)">+</button></div><p style="font-size:9px;color:#555;margin-bottom:8px;line-height:1.5">Mousse, cubre carter, protecciones, mappeo, piñones, etc.</p><div class="fm grn" id="fMod"><input class="inp" id="mName" placeholder="Ej: Mousse Michelin BIB 140/80-18"><div class="row"><input class="inp" id="mHrs" type="number" step="0.1" placeholder="Horas" style="flex:1"><input class="inp" id="mKm" type="number" placeholder="Km" style="flex:1"></div><div class="row"><input class="inp" id="mDate" type="date" style="flex:1"><input class="inp" id="mCost" type="number" placeholder="Costo $" style="flex:1"></div><input class="inp" id="mNotes" placeholder="Notas (marca, modelo, proveedor...)"><button class="btn grn" onclick="addMod()">GUARDAR MODIFICACIÓN</button></div><div id="modL"></div></div>
+<div class="pg" id="pg-tq"><div class="sh"><h2 class="st">TABLA DE TORQUES</h2></div><p style="font-size:8px;color:#555;margin-bottom:6px;line-height:1.5">Owner's Manual 2024 (Art. 3215163en) · Bujía/Spark plug: NGK BR 7 ES · Gap: 0.60mm</p><input class="inp" id="tqSearch" placeholder="🔍 Buscar / Search (ej: culata, cylinder head, M8...)" oninput="rTq()" style="margin-bottom:8px"><div class="frow" id="tqF"></div><div id="tqL"></div></div>
+<div class="pg" id="pg-proc">
+<div class="sh"><h2 class="st">PROCEDIMIENTOS</h2></div>
+<p style="font-size:8px;color:#555;margin-bottom:8px;line-height:1.5">Owner's Manual 2024 (Art. 3215163en) · Secciones 14.1–14.4 y 19.6</p>
+
+<!-- ====== CAMBIO DE ACEITE DE CAJA ====== -->
+<div style="background:var(--c1);border-radius:6px;margin-bottom:10px;overflow:hidden">
+<button onclick="tglP('p1')" style="width:100%;background:none;border:none;color:#ddd;padding:12px;text-align:left;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-size:11px;font-weight:700;letter-spacing:1px">
+<span><span style="color:var(--r);margin-right:8px">▸</span>CAMBIO DE ACEITE DE CAJA</span>
+<span style="font-size:8px;color:#666">Sec. 19.6</span>
+</button>
+<div id="p1" style="display:none;padding:0 12px 12px 12px;font-size:10px;line-height:1.7;color:#bbb">
+<div style="background:#1a1a1a;border-radius:4px;padding:8px;margin-bottom:10px;font-size:9px">
+<div style="color:var(--r);font-weight:700;margin-bottom:4px">⚠ IMPORTANTE</div>
+Esta moto es 2T. NO se "cambia el aceite del motor" — el aceite 2T del tanque (0.8L) se consume con la nafta. Acá se cambia el <b>aceite de caja / transmisión</b>.
+</div>
+
+<div style="color:#888;font-weight:700;margin:8px 0 4px 0;font-size:9px;letter-spacing:1px">⛽ CONSUMIBLES</div>
+<div style="display:flex;justify-content:space-between;border-bottom:1px solid #222;padding:3px 0"><span>Aceite caja</span><span style="color:#ddd">0.80 L · 15W/50 JASO MA2</span></div>
+<div style="display:flex;justify-content:space-between;border-bottom:1px solid #222;padding:3px 0"><span>Sello (drain plug)</span><span style="color:#ddd">Nuevo en cada cambio</span></div>
+
+<div style="color:#888;font-weight:700;margin:12px 0 4px 0;font-size:9px;letter-spacing:1px">🔩 TORQUES</div>
+<div style="display:flex;justify-content:space-between;border-bottom:1px solid #222;padding:3px 0"><span>Tornillo drenaje (M12x1.5)</span><span style="color:#ddd">20 Nm</span></div>
+<div style="display:flex;justify-content:space-between;border-bottom:1px solid #222;padding:3px 0"><span>Tornillo nivel (M6)</span><span style="color:#ddd">8 Nm</span></div>
+
+<div style="color:#888;font-weight:700;margin:12px 0 4px 0;font-size:9px;letter-spacing:1px">📋 PASOS</div>
+<ol style="padding-left:18px;margin:0">
+<li>Calentar el motor a temperatura de trabajo (drenar en caliente).</li>
+<li>Estacionar la moto en superficie nivelada.</li>
+<li>Colocar recipiente debajo del motor para recibir el aceite usado.</li>
+<li>Retirar el tornillo de drenaje con imán (M12x1.5) ubicado en la parte baja del cárter.</li>
+<li>Dejar drenar completamente.</li>
+<li>Limpiar bien el tornillo de drenaje y su imán (revisar limaduras).</li>
+<li>Limpiar la superficie de sellado en el motor.</li>
+<li>Montar el tornillo con <b>sello nuevo</b> y apretar a <b>20 Nm</b>.</li>
+<li>Retirar el tapón de llenado con O-ring.</li>
+<li>Cargar <b>0.80 L</b> de aceite 15W/50.</li>
+<li>Montar y apretar el tapón de llenado con el O-ring.</li>
+<li>Arrancar el motor y revisar que no haya pérdidas.</li>
+<li>Verificar nivel: retirar tornillo de nivel (M6); el aceite debe asomar por el orificio. Si falta, agregar con el motor frío.</li>
+<li>Apretar tornillo de nivel a <b>8 Nm</b>.</li>
+<li>Disponer correctamente del aceite usado.</li>
+</ol>
+</div>
+</div>
+
+<!-- ====== RUEDA DELANTERA ====== -->
+<div style="background:var(--c1);border-radius:6px;margin-bottom:10px;overflow:hidden">
+<button onclick="tglP('p2')" style="width:100%;background:none;border:none;color:#ddd;padding:12px;text-align:left;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-size:11px;font-weight:700;letter-spacing:1px">
+<span><span style="color:var(--r);margin-right:8px">▸</span>QUITAR / PONER RUEDA DELANTERA</span>
+<span style="font-size:8px;color:#666">Sec. 14.1–14.2</span>
+</button>
+<div id="p2" style="display:none;padding:0 12px 12px 12px;font-size:10px;line-height:1.7;color:#bbb">
+
+<div style="color:#888;font-weight:700;margin:8px 0 4px 0;font-size:9px;letter-spacing:1px">🔧 HERRAMIENTAS</div>
+<div style="display:flex;justify-content:space-between;border-bottom:1px solid #222;padding:3px 0"><span>Eje delantero (tornillo)</span><span style="color:#ddd">M20x1.5</span></div>
+<div style="display:flex;justify-content:space-between;border-bottom:1px solid #222;padding:3px 0"><span>Tornillos pinch del barral</span><span style="color:#ddd">M8 — Allen</span></div>
+<div style="display:flex;justify-content:space-between;border-bottom:1px solid #222;padding:3px 0"><span>Caballete elevador</span><span style="color:#ddd">Sí (obligatorio)</span></div>
+<div style="display:flex;justify-content:space-between;border-bottom:1px solid #222;padding:3px 0"><span>Grasa de larga duración</span><span style="color:#ddd">Retenes y eje</span></div>
+
+<div style="color:#888;font-weight:700;margin:12px 0 4px 0;font-size:9px;letter-spacing:1px">🔩 TORQUES</div>
+<div style="display:flex;justify-content:space-between;border-bottom:1px solid #222;padding:3px 0"><span>Tornillo eje delantero (M20x1.5)</span><span style="color:#ddd">35 Nm</span></div>
+<div style="display:flex;justify-content:space-between;border-bottom:1px solid #222;padding:3px 0"><span>Tornillos pinch barral (M8)</span><span style="color:#ddd">15 Nm</span></div>
+
+<div style="color:#888;font-weight:700;margin:12px 0 4px 0;font-size:9px;letter-spacing:1px">📋 DESMONTAJE</div>
+<ol style="padding-left:18px;margin:0">
+<li>Subir la moto al caballete elevador.</li>
+<li>Empujar manualmente la pinza de freno hacia el disco para retroceder los pistones. ⚠ No apoyar la pinza contra los rayos.</li>
+<li>Aflojar el tornillo del eje (1) varias vueltas.</li>
+<li>Aflojar los 2 tornillos pinch del barral (2).</li>
+<li>Empujar el tornillo (1) para sacar el eje del clamp.</li>
+<li>Retirar el tornillo (1).</li>
+<li>Sostener la rueda con una mano y extraer el eje. Bajar la rueda del horquillón.</li>
+<li>Retirar los 2 espaciadores (uno a cada lado). ⚠ No tocar el manubrio del freno con la rueda fuera.</li>
+<li>Apoyar la rueda sobre un lado <b>sin dañar el disco</b>.</li>
+</ol>
+
+<div style="color:#888;font-weight:700;margin:12px 0 4px 0;font-size:9px;letter-spacing:1px">📋 MONTAJE Y CENTRADO</div>
+<ol style="padding-left:18px;margin:0">
+<li>Revisar rodamientos de rueda: si están dañados o gastados, cambiar.</li>
+<li>Limpiar y engrasar los retenes y las superficies de contacto de los espaciadores con grasa de larga duración.</li>
+<li>Colocar los espaciadores en su lugar.</li>
+<li>Limpiar y engrasar levemente el eje.</li>
+<li>Posicionar la rueda y meter el eje hasta que las pastillas queden bien ubicadas sobre el disco.</li>
+<li>Montar y apretar el tornillo del eje a <b>35 Nm</b>.</li>
+<li>Accionar el freno delantero varias veces hasta que las pastillas queden asentadas sobre el disco.</li>
+<li>Bajar la moto del caballete.</li>
+<li>Accionar el freno delantero y <b>comprimir la suspensión a fondo varias veces</b> → esto hace que los barrales se centren solos.</li>
+<li>Recién ahora, apretar los 2 tornillos pinch del barral a <b>15 Nm</b>.</li>
+</ol>
+</div>
+</div>
+
+<!-- ====== RUEDA TRASERA ====== -->
+<div style="background:var(--c1);border-radius:6px;margin-bottom:10px;overflow:hidden">
+<button onclick="tglP('p3')" style="width:100%;background:none;border:none;color:#ddd;padding:12px;text-align:left;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-size:11px;font-weight:700;letter-spacing:1px">
+<span><span style="color:var(--r);margin-right:8px">▸</span>QUITAR / PONER RUEDA TRASERA</span>
+<span style="font-size:8px;color:#666">Sec. 14.3–14.4</span>
+</button>
+<div id="p3" style="display:none;padding:0 12px 12px 12px;font-size:10px;line-height:1.7;color:#bbb">
+
+<div style="color:#888;font-weight:700;margin:8px 0 4px 0;font-size:9px;letter-spacing:1px">🔧 HERRAMIENTAS</div>
+<div style="display:flex;justify-content:space-between;border-bottom:1px solid #222;padding:3px 0"><span>Tuerca eje trasero</span><span style="color:#ddd">M22x1.5</span></div>
+<div style="display:flex;justify-content:space-between;border-bottom:1px solid #222;padding:3px 0"><span>Caballete elevador</span><span style="color:#ddd">Sí (obligatorio)</span></div>
+<div style="display:flex;justify-content:space-between;border-bottom:1px solid #222;padding:3px 0"><span>Grasa de larga duración</span><span style="color:#ddd">Retenes y eje</span></div>
+
+<div style="color:#888;font-weight:700;margin:12px 0 4px 0;font-size:9px;letter-spacing:1px">🔩 TORQUE</div>
+<div style="display:flex;justify-content:space-between;border-bottom:1px solid #222;padding:3px 0"><span>Tuerca eje trasero (M22x1.5)</span><span style="color:#ddd">80 Nm</span></div>
+
+<div style="color:#888;font-weight:700;margin:12px 0 4px 0;font-size:9px;letter-spacing:1px">📋 DESMONTAJE</div>
+<ol style="padding-left:18px;margin:0">
+<li>Subir la moto al caballete elevador.</li>
+<li>Empujar manualmente la pinza de freno hacia el disco para retroceder el pistón. ⚠ No apoyar contra los rayos.</li>
+<li>Retirar la tuerca (1) del eje.</li>
+<li>Sacar el tensor de cadena (2) del lado de la tuerca.</li>
+<li>Empujar el eje (3) lo suficiente como para poder mover la rueda hacia adelante.</li>
+<li>Empujar la rueda lo más adelante posible hasta destensar la cadena.</li>
+<li>Sacar la cadena del piñón trasero (puede taparse para protegerlo).</li>
+<li>Sostener la rueda y terminar de retirar el eje. Bajar la rueda del basculante.</li>
+<li>Retirar los 2 espaciadores. ⚠ No accionar el freno trasero con la rueda fuera.</li>
+<li>Apoyar la rueda <b>sin dañar el disco</b>.</li>
+</ol>
+
+<div style="color:#888;font-weight:700;margin:12px 0 4px 0;font-size:9px;letter-spacing:1px">📋 MONTAJE Y CENTRADO</div>
+<ol style="padding-left:18px;margin:0">
+<li>Revisar rodamientos de rueda: si están dañados o gastados, cambiar.</li>
+<li>Limpiar y engrasar los retenes y las superficies de contacto de los espaciadores con grasa de larga duración.</li>
+<li>Colocar los espaciadores en su lugar.</li>
+<li>Limpiar y engrasar levemente el eje.</li>
+<li>Posicionar la rueda en el basculante e insertar el eje. Las pastillas deben quedar bien ubicadas sobre el disco.</li>
+<li>Montar la cadena sobre el piñón trasero.</li>
+<li>Posicionar los tensores de cadena. Montar la tuerca <b>sin apretar todavía</b>.</li>
+<li>Verificar que ambos tensores estén bien encastrados sobre sus tornillos de regulación.</li>
+<li>Ajustar tensión de cadena. Usar las <b>marcas de referencia</b> en el basculante — ambos lados deben coincidir para que la rueda quede centrada.</li>
+<li>Recién ahora, apretar la tuerca del eje a <b>80 Nm</b>.</li>
+<li>Accionar el freno trasero varias veces hasta asentar las pastillas.</li>
+<li>Bajar la moto del caballete.</li>
+</ol>
+
+<div style="background:#1a1a1a;border-radius:4px;padding:8px;margin-top:10px;font-size:9px">
+<div style="color:var(--r);font-weight:700;margin-bottom:4px">⚠ TIP</div>
+La rueda queda centrada usando las <b>marcas de referencia del basculante</b>, no a ojo. Si la cadena queda torcida o el desgaste de la goma es desparejo, revisar que ambos tensores estén en la misma marca.
+</div>
+</div>
+</div>
+
+</div>
+
+<div class="pg" id="pg-codes">
+<div class="sh"><h2 class="st"><svg width="20" height="16" viewBox="0 0 28 22" fill="#C8102E" style="vertical-align:middle;margin-right:6px"><path d="M5 6h2V4h4v2h6V4h4v2h2a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2v-3H1v-4h2V8a2 2 0 012-2zm1 3v6h16V9H6zm7 1v2h2v-2h-2zm-1 3h4v1h-4v-1z"/></svg>BLINK CODES</h2></div>
+<p style="font-size:9px;color:#555;margin-bottom:8px;line-height:1.5">Owner's Manual 2024 — Sección 23. Solo versión derestricted. Si te prende el MIL en el campo, buscá el código acá.</p>
+<input class="inp" id="codeSearch" placeholder="🔍 Buscar por código, componente o error (ej: 42, oil pump, fuel...)" oninput="rCodes()" style="margin-bottom:10px">
+<div id="codesL"></div>
+</div>
+<div class="pg" id="pg-info"><div class="sh"><h2 class="st">INFORME DE USO</h2></div><div id="infoL"></div></div>
+<div class="pg" id="pg-manual">
+<div class="sh"><h2 class="st">MANUAL EC 250 / EC 300</h2></div>
+<p style="font-size:9px;color:#555;margin-bottom:10px;line-height:1.5">Owner's Manual 2024 (Art. 3215163en) — 158 páginas — EC 250 EU/US · EC 300 EU/US</p>
+<div style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px">
+<a href="https://gasgas.com.ru/assets/media/files/manuals/enduro/EC%20250%202024.pdf" target="_blank" rel="noopener" style="display:block;background:var(--c1);border:1px solid var(--r);border-radius:6px;padding:12px;text-decoration:none;text-align:center"><span style="font-size:24px;display:block;margin-bottom:4px">📄</span><span style="color:var(--r);font-weight:700;font-size:12px;letter-spacing:1px">VER MANUAL ONLINE (PDF)</span><span style="display:block;font-size:8px;color:#666;margin-top:4px">Se abre en el navegador — no necesita descarga</span></a>
+<div style="background:var(--c1);border:1px solid var(--b2);border-radius:6px;padding:12px;text-align:center">
+<span style="font-size:24px;display:block;margin-bottom:4px">📱</span>
+<span style="color:#ddd;font-weight:700;font-size:12px;letter-spacing:1px">CARGAR MI PDF LOCAL</span>
+<span style="display:block;font-size:8px;color:#666;margin-top:4px;margin-bottom:8px">Si tenés el PDF descargado en tu celu, cargalo acá para verlo sin internet</span>
+<input type="file" id="pdfFile" accept=".pdf" style="display:none" onchange="loadPdf(event)">
+<button class="btn" style="background:#555;font-size:10px;padding:7px" onclick="document.getElementById('pdfFile').click()">SELECCIONAR PDF</button>
+</div>
+</div>
+<div id="pdfViewer" style="display:none;background:#222;border-radius:6px;overflow:hidden">
+<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 10px;background:#1a1a1a">
+<span style="font-size:10px;color:#aaa" id="pdfName">Manual.pdf</span>
+<button class="btnx" onclick="closePdf()" style="font-size:14px">✕</button>
+</div>
+<iframe id="pdfFrame" style="width:100%;height:70vh;border:none;background:#333"></iframe>
+</div>
+<div style="margin-top:14px;background:var(--c1);border-radius:6px;padding:10px">
+<div style="font-size:10px;font-weight:700;color:#888;margin-bottom:6px;letter-spacing:1px">DATOS DE REFERENCIA RÁPIDA</div>
+<div style="font-size:9px;color:#aaa;line-height:1.8">
+<div style="display:flex;justify-content:space-between;border-bottom:1px solid #222;padding:3px 0"><span>Motor</span><span style="color:#ddd">1-cyl 2T 249cc water-cooled</span></div>
+<div style="display:flex;justify-content:space-between;border-bottom:1px solid #222;padding:3px 0"><span>Bore × Stroke</span><span style="color:#ddd">66.4 × 72 mm</span></div>
+<div style="display:flex;justify-content:space-between;border-bottom:1px solid #222;padding:3px 0"><span>Ralentí / Idle</span><span style="color:#ddd">1,400–1,500 rpm</span></div>
+<div style="display:flex;justify-content:space-between;border-bottom:1px solid #222;padding:3px 0"><span>Bujía / Spark plug</span><span style="color:#ddd">NGK BR 7 ES · 0.60mm</span></div>
+<div style="display:flex;justify-content:space-between;border-bottom:1px solid #222;padding:3px 0"><span>Aceite caja / Gear oil</span><span style="color:#ddd">0.80L · 15W50 JASO MA2</span></div>
+<div style="display:flex;justify-content:space-between;border-bottom:1px solid #222;padding:3px 0"><span>Aceite 2T</span><span style="color:#ddd">Motorex Cross Power 2T</span></div>
+<div style="display:flex;justify-content:space-between;border-bottom:1px solid #222;padding:3px 0"><span>Coolant</span><span style="color:#ddd">0.95L · Motorex M3.0</span></div>
+<div style="display:flex;justify-content:space-between;border-bottom:1px solid #222;padding:3px 0"><span>Tanque / Fuel tank</span><span style="color:#ddd">9L · ROZ 95 (E10 ok)</span></div>
+<div style="display:flex;justify-content:space-between;border-bottom:1px solid #222;padding:3px 0"><span>Aceite 2T tanque</span><span style="color:#ddd">0.8L</span></div>
+<div style="display:flex;justify-content:space-between;border-bottom:1px solid #222;padding:3px 0"><span>Frenos / Brakes</span><span style="color:#ddd">DOT 4 / DOT 5.1</span></div>
+<div style="display:flex;justify-content:space-between;border-bottom:1px solid #222;padding:3px 0"><span>Fork oil</span><span style="color:#ddd">SAE 4 · 635±10ml/leg</span></div>
+<div style="display:flex;justify-content:space-between;border-bottom:1px solid #222;padding:3px 0"><span>Shock fluid</span><span style="color:#ddd">SAE 2.5</span></div>
+<div style="display:flex;justify-content:space-between;border-bottom:1px solid #222;padding:3px 0"><span>Presión calle / Street</span><span style="color:#ddd">F: 2.0 bar · R: 2.0 bar</span></div>
+<div style="display:flex;justify-content:space-between;border-bottom:1px solid #222;padding:3px 0"><span>Presión offroad</span><span style="color:#ddd">F: 1.0 bar · R: 1.0 bar</span></div>
+<div style="display:flex;justify-content:space-between;border-bottom:1px solid #222;padding:3px 0"><span>Disco freno límite del.</span><span style="color:#ddd">2.5 mm</span></div>
+<div style="display:flex;justify-content:space-between;border-bottom:1px solid #222;padding:3px 0"><span>Disco freno límite tras.</span><span style="color:#ddd">3.5 mm</span></div>
+<div style="display:flex;justify-content:space-between;border-bottom:1px solid #222;padding:3px 0"><span>Cadena / Chain</span><span style="color:#ddd">5/8 × 1/4" · 14:45</span></div>
+<div style="display:flex;justify-content:space-between;border-bottom:1px solid #222;padding:3px 0"><span>Peso sin fuel</span><span style="color:#ddd">106 kg (EU) / 107.6 kg (US)</span></div>
+<div style="display:flex;justify-content:space-between;border-bottom:1px solid #222;padding:3px 0"><span>Batería</span><span style="color:#ddd">HJTZ5S-FP-C 12V 2Ah Li-ion</span></div>
+<div style="display:flex;justify-content:space-between;padding:3px 0"><span>Fusible / Fuse</span><span style="color:#ddd">20A</span></div>
+</div>
+</div>
+</div>
+<div class="pg" id="pg-cfg"><div class="sh"><h2 class="st">INTERVALOS DE SERVICIO</h2><button class="btns" onclick="tgl('fSvc')">+</button></div><div class="fm" id="fSvc"><input class="inp" id="sName" placeholder="Nombre del servicio"><input class="inp" id="sInt" type="number" placeholder="Intervalo (horas)"><input class="inp" id="sNotes" placeholder="Notas"><button class="btn" onclick="addSvc()">AGREGAR</button></div><div id="svcL"></div>
+<div class="bkp"><div class="bkp-title">☁ SINCRONIZAR CON GITHUB</div><p style="font-size:9px;color:#888;margin-bottom:8px;line-height:1.5">Cada cambio se sube solo al repo privado (datos/ec250.json). El token queda guardado solo en este celular.</p><input class="inp" id="ghRepo" placeholder="usuario/repo (ej. erickiess/ec250-datos)"><input class="inp" id="ghTok" type="password" placeholder="Token de GitHub (github_pat_...)"><div class="row" style="margin-bottom:6px"><button class="btn blue" style="flex:1" onclick="ghSaveCfg()">GUARDAR Y SUBIR</button><button class="btn" style="flex:1;background:#555" onclick="ghPull(true)">⬇ BAJAR DEL REPO</button></div><p id="ghStat" style="font-size:9px;color:#888;line-height:1.4">Sin configurar</p></div>
+<div class="bkp"><div class="bkp-title">💾 BACKUP / RESTAURAR</div><p style="font-size:9px;color:#888;margin-bottom:8px;line-height:1.5">Los datos se guardan en el navegador (localStorage). Si limpiás la caché se pierden. Hacé backup periódicamente.</p><div class="row" style="margin-bottom:6px"><button class="btn blue" style="flex:1" onclick="exportData()">⬇ EXPORTAR BACKUP</button><button class="btn" style="flex:1;background:#555" onclick="document.getElementById('impFile').click()">⬆ IMPORTAR</button></div><input type="file" id="impFile" accept=".json" style="display:none" onchange="importData(event)"><p style="font-size:8px;color:#555;line-height:1.4">El backup es un archivo .json que podés guardar en Drive, mandarte por mail o WhatsApp. Para restaurar, importá ese archivo.</p></div>
+<div style="margin-top:16px;padding-top:10px;border-top:1px solid #333"><div class="st" style="font-size:10px;color:#555;margin-bottom:6px">ZONA PELIGROSA</div><div id="rstA"><button class="btnd" onclick="rstC()">RESETEAR TODO</button></div></div></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ===== TORQUES =====
+const TQ={"Motor / Engine (24.2)":[
+{p:"Tornillo, paletas internas reed",e:"Screw, inner reed paddles",s:"EJOT 3.5x25",nm:1,lc:""},
+{p:"Tornillo, placa soporte membrana",e:"Screw, membrane support plate",s:"EJOT 3x12",nm:1,lc:""},
+{p:"Tornillo, paletas externas reed",e:"Screw, outer reed paddles",s:"EJOT 3x6",nm:1,lc:""},
+{p:"Tuerca, eje clapeta escape",e:"Nut, axle for control flap",s:"M5",nm:5,lc:""},
+{p:"Tornillo, actuador escape",e:"Screw, actuator, exhaust control",s:"M5",nm:5,lc:"Loctite 243"},
+{p:"Tornillo, retén rodamiento",e:"Screw, bearing retainer",s:"M5",nm:6,lc:"Loctite 243"},
+{p:"Tornillo, retenedor resorte embrague",e:"Screw, clutch spring retainer",s:"M5",nm:6,lc:""},
+{p:"Tornillo, clapeta escape",e:"Screw, control flap, exhaust control",s:"M5",nm:8,lc:"Loctite 243"},
+{p:"Tornillo, tapa actuador escape",e:"Screw, cover, actuator, exhaust control",s:"M5",nm:5,lc:"Loctite 243"},
+{p:"Tornillo, sensor vel. cigüeñal",e:"Screw, crankshaft speed sensor",s:"M5",nm:6,lc:"Loctite 243"},
+{p:"Tornillo, tapa control escape",e:"Screw, exhaust control cover",s:"M5",nm:6,lc:""},
+{p:"Tornillo, eje loco escape",e:"Screw, idler shaft, exhaust control",s:"M5",nm:8,lc:"Loctite 243"},
+{p:"Tornillo, leva bloqueo",e:"Screw, locking lever",s:"M5",nm:6,lc:"Loctite 243"},
+{p:"Tornillo, soporte retención escape",e:"Screw, retaining bracket of exhaust control",s:"M5",nm:6,lc:"Loctite 2701"},
+{p:"Tornillo, estator",e:"Screw, stator",s:"M5",nm:6,lc:"Loctite 243"},
+{p:"Tornillo sangrado, culata",e:"Bleeder screw, cylinder head",s:"M6",nm:10.5,lc:""},
+{p:"Tornillo sangrado, tapa bomba agua",e:"Bleeder screw, water pump cover",s:"M6x25",nm:8,lc:""},
+{p:"Tuerca, impulsor bomba agua",e:"Nut, water pump impeller",s:"M6",nm:5,lc:"Loctite 243"},
+{p:"Tornillo, tapa alternador",e:"Screw, alternator cover",s:"M6",nm:8,lc:""},
+{p:"Tornillo, tapa embrague",e:"Screw, clutch cover",s:"M6/M6x25/M6x60",nm:10,lc:""},
+{p:"Tornillo, tapa motor arranque",e:"Screw, cover, starter motor",s:"M6",nm:8,lc:""},
+{p:"Tornillo, cárter motor",e:"Screw, engine case",s:"M6x45/M6x60",nm:10,lc:""},
+{p:"Tornillo, monitoreo nivel aceite caja",e:"Screw, gear oil level monitoring",s:"M6",nm:8,lc:""},
+{p:"Tornillo, brida admisión/reed valve",e:"Screw, intake flange/reed valve housing",s:"M6",nm:6,lc:""},
+{p:"Tornillo, brida intermedia",e:"Screw, intermediate flange",s:"M6",nm:8,lc:""},
+{p:"Tornillo, tapa ext. embrague",e:"Screw, outer clutch cover",s:"M6",nm:8,lc:""},
+{p:"Tornillo, tambor selector",e:"Screw, shift drum locating",s:"M6",nm:10,lc:"Loctite 243"},
+{p:"Tornillo, palanca cambio",e:"Screw, shift lever",s:"M6",nm:14,lc:"Loctite 243"},
+{p:"Tornillo, motor arranque",e:"Screw, starter motor",s:"M6",nm:10,lc:""},
+{p:"Tornillo, tapa bomba agua largo",e:"Screw, water pump cover, long",s:"M6x60",nm:10,lc:""},
+{p:"Tornillo, eje balanceador",e:"Screw, balancer shaft",s:"M8",nm:30,lc:"Loctite 243"},
+{p:"Tornillo, culata",e:"Screw, cylinder head",s:"M8",nm:27,lc:""},
+{p:"Tuerca, base cilindro",e:"Nut, cylinder base",s:"M10",nm:38,lc:""},
+{p:"Tornillo, piñón motor",e:"Screw, drive chain engine sprocket",s:"M10",nm:60,lc:"Loctite 2701"},
+{p:"Espárrago, base cilindro",e:"Stud, cylinder base",s:"M10",nm:12,lc:""},
+{p:"Tuerca, rotor",e:"Nut, rotor",s:"M12x1",nm:60,lc:""},
+{p:"Tapón drenaje aceite caja c/imán",e:"Gear oil drain plug with magnet",s:"M12x1.5",nm:20,lc:""},
+{p:"Bujía — NGK BR 7 ES",e:"Spark plug — NGK BR 7 ES",s:"M14x1.25",nm:25,lc:"Gap: 0.60mm"},
+{p:"Tuerca, cubo embrague interno",e:"Nut, inner clutch hub",s:"M18x1.5",nm:100,lc:""},
+{p:"Tuerca, engranaje primario",e:"Nut, primary gear wheel",s:"M18LHx1.5",nm:150,lc:"Loctite 243"}
+],"Chasis / Chassis (24.9)":[
+{p:"Conexión combustible en bomba",e:"Fuel connection on the fuel pump",s:"EJOT K60x30",nm:2.5,lc:""},
+{p:"Tornillos restantes chasis",e:"Remaining screws on chassis",s:"EJOT",nm:2,lc:""},
+{p:"Tornillo, interruptor emergencia",e:"Screw, emergency OFF switch",s:"EJOT K50x18",nm:2,lc:""},
+{p:"Tornillo, sensor temp. admisión",e:"Screw, intake air temperature sensor",s:"EJOT 45x12",nm:0.7,lc:""},
+{p:"Tornillo, sensor nivel aceite",e:"Screw, oil fill level sensor",s:"EJOT 50x18",nm:2.5,lc:""},
+{p:"Tornillo, soporte bomba aceite",e:"Screw, oil pump holder on oil tank",s:"EJOT 45x12",nm:0.7,lc:""},
+{p:"Tornillo, regulador presión",e:"Screw, pressure regulator",s:"EJOT K60x25",nm:2.3,lc:""},
+{p:"Tornillo, abrazadera manguera radiador",e:"Screw, radiator hoses clip",s:"",nm:2.4,lc:""},
+{p:"Tornillo, puño fijo",e:"Screw, fixed grip",s:"M4",nm:5,lc:"Loctite 243"},
+{p:"Tornillo, abrazadera cuerpo acelerador",e:"Screw, throttle valve body hose clamp",s:"M4",nm:2.8,lc:""},
+{p:"Nipple rayo, rueda delantera",e:"Spoke nipple, front wheel",s:"M4.5",nm:6,lc:""},
+{p:"Nipple rayo, rueda trasera",e:"Spoke nipple, rear wheel",s:"M4.5",nm:6,lc:""},
+{p:"Tuercas/tornillos restantes M5",e:"Remaining nuts/screws, chassis M5",s:"M5",nm:5,lc:""},
+{p:"Tornillo, terminal batería",e:"Screw, battery terminal",s:"M5",nm:2.5,lc:""},
+{p:"Tornillo, anillo ajuste amortiguador",e:"Screw, shock absorber adjusting ring",s:"M5",nm:5,lc:""},
+{p:"Tornillo, tapa cuerpo acelerador",e:"Screw, throttle valve body cover",s:"M5",nm:2.6,lc:""},
+{p:"Tuerca, cable motor arranque",e:"Nut, cable on starter motor",s:"M6",nm:4,lc:""},
+{p:"Tuerca, cable acelerador en cuerpo",e:"Nut, throttle cable on throttle valve body",s:"M6",nm:3,lc:""},
+{p:"Tuercas/tornillos restantes M6",e:"Remaining nuts/screws, chassis M6",s:"M6",nm:10,lc:""},
+{p:"Tornillo, soporte batería",e:"Screw, battery support bracket",s:"M6",nm:6,lc:""},
+{p:"Tornillo, palanca freno",e:"Screw, brake lever",s:"M6",nm:5,lc:""},
+{p:"Tornillo, guía línea freno link",e:"Screw, brake line guide for link fork",s:"M6",nm:4.5,lc:""},
+{p:"Tornillo, cable relay arranque",e:"Screw, cable on starter relay",s:"M6",nm:6,lc:""},
+{p:"Tornillo, guía cadena",e:"Screw, chain guide",s:"M6",nm:10,lc:""},
+{p:"Tornillo, protección deslizante cadena",e:"Screw, chain sliding guard",s:"M6",nm:6,lc:"Loctite 243"},
+{p:"Tornillo, palanca embrague",e:"Screw, clutch lever",s:"M6",nm:5,lc:""},
+{p:"Tornillo, disco freno delantero",e:"Screw, front brake disc",s:"M6",nm:14,lc:"Loctite 243"},
+{p:"Tornillo, spoiler tanque radiador",e:"Screw, fuel tank spoiler on radiator",s:"M6",nm:6,lc:""},
+{p:"Tornillo, cable masa cola",e:"Screw, ground wire in tail section",s:"M6",nm:10,lc:""},
+{p:"Tornillo, colector silent block",e:"Screw, manifold on silent block",s:"M6",nm:6,lc:""},
+{p:"Tornillo, bomba aceite",e:"Screw, oil pump",s:"M6",nm:6,lc:""},
+{p:"Tornillo, rótula cilindro freno trasero",e:"Screw, push rod ball joint on rear brake",s:"M6",nm:10,lc:""},
+{p:"Tornillo, disco freno trasero",e:"Screw, rear brake disc",s:"M6",nm:14,lc:"Loctite 243"},
+{p:"Tornillo, silent block en cuadro",e:"Screw, silent block on frame",s:"M6",nm:6,lc:""},
+{p:"Tornillo, puño acelerador",e:"Screw, throttle grip",s:"M6",nm:5,lc:""},
+{p:"Tornillo fijación asiento",e:"Seat fixing screw",s:"M6",nm:10,lc:""},
+{p:"Tuerca, corona trasera",e:"Nut, rear sprocket screw",s:"M8",nm:35,lc:"Loctite 2701"},
+{p:"Tuerca, rim lock",e:"Nut, rim lock",s:"M8",nm:12,lc:""},
+{p:"Tuerca tope palanca freno trasero",e:"Rear brake lever stop nut",s:"M8",nm:20,lc:""},
+{p:"Tuercas/tornillos restantes M8",e:"Remaining nuts/screws, chassis M8",s:"M8",nm:25,lc:""},
+{p:"Tornillo, tija inferior",e:"Screw, bottom triple clamp",s:"M8",nm:15,lc:""},
+{p:"Tornillo, pieza deslizante cadena",e:"Screw, chain sliding piece",s:"M8",nm:15,lc:""},
+{p:"Tornillo, soporte motor (brace) M8x15",e:"Screw, engine brace M8x15",s:"M8x15",nm:25,lc:"Loctite 2701"},
+{p:"Tornillo, soporte motor (brace) M8x20",e:"Screw, engine brace M8x20",s:"M8x20",nm:25,lc:"Loctite 243"},
+{p:"Tornillo, tapa piñón motor",e:"Screw, engine sprocket cover",s:"M8",nm:15,lc:""},
+{p:"Tornillo, vástago horquilla",e:"Screw, fork stub",s:"M8",nm:15,lc:""},
+{p:"Tornillo, pinza freno delantera",e:"Screw, front brake caliper",s:"M8",nm:25,lc:"Loctite 243"},
+{p:"Tornillo, abrazadera manubrio",e:"Screw, handlebar clamp",s:"M8",nm:20,lc:""},
+{p:"Tornillo, colector",e:"Screw, manifold",s:"M8",nm:15,lc:""},
+{p:"Tornillo, caballete lateral",e:"Screw, side stand attachment",s:"M8",nm:33,lc:"Loctite 2701"},
+{p:"Tornillo, subcuadro inferior",e:"Screw, subframe, bottom",s:"M8",nm:35,lc:"Loctite 243"},
+{p:"Tornillo, tapa columna dirección",e:"Screw, top steering stem",s:"M8",nm:20,lc:"Loctite 243"},
+{p:"Tornillo, tija superior",e:"Screw, top triple clamp",s:"M8",nm:20,lc:""},
+{p:"Tornillo, sensor vel. rueda",e:"Screw, wheel speed sensor on axle clamp",s:"M8",nm:4.5,lc:""},
+{p:"Tornillo subcuadro superior",e:"Top subframe screw",s:"M8",nm:40,lc:"Loctite 2701"},
+{p:"Tornillo soporte motor (bracket)",e:"Engine bracket screw",s:"M10",nm:60,lc:""},
+{p:"Tuerca, palanca freno pie",e:"Nut, foot brake lever",s:"M10",nm:45,lc:""},
+{p:"Tuercas/tornillos restantes M10",e:"Remaining nuts/screws, chassis M10",s:"M10",nm:45,lc:""},
+{p:"Tornillo, amortiguador inferior",e:"Screw, bottom shock absorber",s:"M10",nm:60,lc:"Loctite 2701"},
+{p:"Tornillo, soporte manubrio",e:"Screw, handlebar support",s:"M10",nm:40,lc:"Loctite 243"},
+{p:"Tornillo, amortiguador superior",e:"Screw, top shock absorber",s:"M10",nm:60,lc:"Loctite 2701"},
+{p:"Tuerca, ángulo lever a link fork",e:"Nut, angle lever to link fork",s:"M16x1.5",nm:80,lc:""},
+{p:"Tuerca, pivote horquilla",e:"Nut, fork pivot",s:"M16x1.5",nm:100,lc:""},
+{p:"Tuerca, bieleta en ángulo lever",e:"Nut, linkage lever on angle lever",s:"M16x1.5",nm:80,lc:""},
+{p:"Tornillo, eje rueda delantera",e:"Screw, front wheel spindle",s:"M20x1.5",nm:35,lc:""},
+{p:"Tornillo, tapa dirección",e:"Screw, top steering head",s:"M20x1.5",nm:12,lc:""},
+{p:"Tuerca eje rueda trasera",e:"Rear wheel spindle nut",s:"M22x1.5",nm:80,lc:""},
+{p:"Conexión roscada sist. refrigeración",e:"Screw-in fitting, cooling system",s:"M24x1.5",nm:7.5,lc:""}
+]};
+
+const DSVC=[{id:"m1",name:"Cambio aceite caja",h:15,notes:"0.80L Motorex Top Speed 4T 15W50 JASO MA2"},{id:"m2",name:"Limpieza filtro aire + caja",h:15,notes:"Motorex Racing Bio Liquid Power"},{id:"m3",name:"Verificar tensión cadena + piñón + corona",h:15,notes:""},{id:"m4",name:"Verificar pastillas freno del. y tras.",h:15,notes:"Límite disco del: 2.5mm / tras: 3.5mm"},{id:"m5",name:"Verificar nivel líquido frenos + embrague",h:15,notes:"DOT 4 / DOT 5.1"},{id:"m6",name:"Verificar coolant + anticongelante",h:15,notes:"Motorex Coolant M3.0"},{id:"m7",name:"Verificar neumáticos + presión",h:15,notes:"Calle: 2.0bar — Offroad: 1.0bar"},{id:"m8",name:"Verificar tensión rayos",h:15,notes:"6 Nm nipple M4.5"},{id:"m9",name:"Verificar cuadro + link fork",h:15,notes:""},{id:"m10",name:"Retorqueo tornillos/tuercas/abrazaderas",h:15,notes:"Ver tabla torques"},{id:"m11",name:"Cambiar fuel screen",h:15,notes:""},{id:"m12",name:"Engrase partes móviles",h:15,notes:"Motorex Chainlube Offroad"},{id:"m13",name:"Cambiar lana vidrio silenciador",h:45,notes:""},{id:"m14",name:"Servicio horquilla",h:45,notes:"WP XPLOR OC — SAE 4 — 635±10ml/pata"},{id:"m15",name:"Servicio amortiguador",h:45,notes:"WP XPLOR LDS — SAE 2.5"},{id:"m16",name:"Verificar rodamiento dirección",h:45,notes:""},{id:"m17",name:"Verificar reed valve / brida admisión",h:45,notes:""},{id:"m18",name:"Verificar arranque eléctrico",h:45,notes:""},{id:"m19",name:"Cambiar bujía + conector",h:90,notes:"NGK BR 7 ES — Gap: 0.60mm"},{id:"m20",name:"Cambiar filtro combustible",h:90,notes:""},{id:"m21",name:"Cambiar líquido frenos del. + tras.",h:90,notes:"DOT 4 Castrol React / Motorex DOT 5.1"},{id:"m22",name:"Cambiar líquido embrague",h:90,notes:""},{id:"m23",name:"Cambiar coolant",h:90,notes:"0.95L Motorex Coolant M3.0"},{id:"m24",name:"Lubricar rodamiento dirección",h:90,notes:""},{id:"m25",name:"Limpiar oil screen tanque aceite",h:90,notes:""},{id:"m26",name:"Servicio menor motor",h:90,notes:"Pistón, culata, O-rings, cilindro, escape. Z: 50.0mm"},{id:"m27",name:"Servicio mayor motor",h:90,notes:"Biela, cigüeñal, rodamientos, retenes, transmisión"}];
+
+// ===== BLINK CODES — Manual Section 23 =====
+const CODES=[
+{code:"02",flash:"2x short",component:"Sensor velocidad cigüeñal / Crankshaft speed sensor",errors:["Synchronization faulty / Sincronización defectuosa","Signal implausible / Señal implausible"]},
+{code:"06",flash:"6x short",component:"Sensor posición mariposa / Throttle valve position sensor (circuit A)",errors:["Input signal too low / Señal entrada muy baja","Input signal too high / Señal entrada muy alta"]},
+{code:"09",flash:"9x short",component:"Sensor presión cárter + presión ambiente / Crankcase & ambient air pressure sensor",errors:["Crankcase pressure sensor — short circuit to ground","Crankcase pressure sensor — open/short circuit to plus","Ambient air pressure sensor — short circuit to ground","Ambient air pressure sensor — open/short circuit to plus"]},
+{code:"12",flash:"1x long, 2x short",component:"Sensor temp. coolant / Coolant temperature sensor",errors:["Input signal too low / Señal muy baja","Input signal too high / Señal muy alta"]},
+{code:"13",flash:"1x long, 3x short",component:"Sensor temp. admisión / Intake air temperature sensor",errors:["Input signal too low / Señal muy baja","Input signal too high / Señal muy alta"]},
+{code:"14",flash:"1x long, 4x short",component:"Sensor presión cárter / Crankcase pressure sensor",errors:["Difference too high between sensor and ECU / Diferencia excesiva sensor vs ECU"]},
+{code:"15",flash:"1x long, 5x short",component:"Sensor inclinación / Tilt sensor",errors:["Input signal too low / Señal muy baja","Input signal too high / Señal muy alta"]},
+{code:"17",flash:"1x long, 7x short",component:"Sonda lambda / Lambda sensor (EU only)",errors:["Input signal too low / Señal muy baja","Input signal too high / Señal muy alta"]},
+{code:"21",flash:"2x long, 1x short",component:"Voltaje batería / Battery voltage",errors:["Input voltage too low / Voltaje muy bajo","Input voltage too high / Voltaje muy alto"]},
+{code:"33",flash:"3x long, 3x short",component:"Válvula inyección 1, cilindro 1 / Injection valve 1, cyl 1",errors:["Input signal too low / Señal muy baja","Input signal too high / Señal muy alta"]},
+{code:"34",flash:"3x long, 4x short",component:"Válvula inyección 2, cilindro 1 / Injection valve 2, cyl 1",errors:["Input signal too low / Señal muy baja","Input signal too high / Señal muy alta"]},
+{code:"37",flash:"3x long, 7x short",component:"Bobina encendido / Ignition coil",errors:["Circuit fault / Falla de circuito"]},
+{code:"41",flash:"4x long, 1x short",component:"Bomba combustible / Fuel pump",errors:["Short circuit to ground / open circuit","Short circuit to plus"]},
+{code:"42",flash:"4x long, 2x short",component:"Bomba aceite + sensor nivel / Oil pump & oil level sensor",errors:["Oil pump — input signal too low","Oil pump — input signal too high","Oil level sensor — short circuit to ground","Oil level sensor — short circuit to plus","Oil lamp — malfunction in circuit","Oil lamp — short circuit to ground","Oil lamp — short circuit to plus"]},
+{code:"45",flash:"4x long, 5x short",component:"Calentador sonda lambda / Lambda sensor heater (EU only)",errors:["Short circuit to ground","Short circuit to plus"]},
+{code:"50",flash:"5x long",component:"Actuador control escape / Exhaust control actuator",errors:["No signal / Sin señal","Temperature too high / Temp. muy alta","Incorrect setting / Config. incorrecta","Setpoint value signal faulty / Señal valor referencia defectuosa","Input signal too low","Input signal too high","Mechanical error in lower position","Mechanical error in upper position","Mechanical error / Error mecánico"]},
+{code:"52",flash:"5x long, 2x short",component:"Válvula vapor combustible / Fuel vapor valve (EU only)",errors:["Circuit fault / Falla de circuito","Voltage too low / Voltaje muy bajo","Voltage too high / Voltaje muy alto"]},
+{code:"53",flash:"5x long, 3x short",component:"Voltaje sensor 1 / Sensor voltage 1",errors:["Open circuit / short circuit to ground","Short circuit to plus"]},
+{code:"54",flash:"5x long, 4x short",component:"Voltaje sensor 2 / Sensor voltage 2",errors:["Open circuit / short circuit to ground","Short circuit to plus"]}
+];
+
+// ===== STATE =====
+const KEY="ec250v6";
+let S={hrs:0,km:0,logs:[],svcs:DSVC.map(s=>({...s})),mods:[],usage:[]};
+const $=id=>document.getElementById(id);
+const gid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+const kgm=n=>(n*.10197).toFixed(2);const ftl=n=>(n*.73756).toFixed(1);
+const td=()=>new Date().toISOString().slice(0,10);
+const fD=iso=>{if(!iso)return"—";try{return new Date(iso+"T12:00:00").toLocaleDateString("es-AR",{day:"2-digit",month:"short",year:"2-digit"})}catch{return iso}};
+const fN=n=>(n!=null&&n!=="")?Number(n).toLocaleString("es-AR"):"—";
+
+function ld(){try{const r=localStorage.getItem(KEY);if(r){S=JSON.parse(r);if(!S.mods)S.mods=[];if(!S.svcs)S.svcs=DSVC.map(s=>({...s}));if(S.km==null)S.km=0;if(!S.usage)S.usage=[]}}catch{}$("hrs").value=S.hrs;$("km").value=S.km}
+function sv(){S.ts=Date.now();try{localStorage.setItem(KEY,JSON.stringify(S))}catch{}ghQueue()}
+function toast(msg){const t=$("toast");t.textContent=msg;t.style.display="block";setTimeout(()=>t.style.display="none",2500)}
+
+// ===== TABS =====
+function go(t){document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('on',b.dataset.t===t));document.querySelectorAll('.pg').forEach(p=>p.classList.toggle('on',p.id==='pg-'+t));rAll()}
+function tglP(id){const e=document.getElementById(id);if(!e)return;e.style.display=e.style.display==='none'?'block':'none'}
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>go(b.dataset.t));
+$("hrs").onchange=function(){const v=parseFloat(this.value);if(!isNaN(v)){const changed=v!==S.hrs;S.hrs=v;const logged=updateUsage(S.hrs,S.km);sv();rAll();if(logged)toast("📍 Lectura: "+v+"h"+(S.km?" / "+fN(S.km)+"km":""));else if(changed)toast("Horas actualizadas")}};
+$("km").onchange=function(){const v=parseFloat(this.value);if(!isNaN(v)){S.km=v;const logged=updateUsage(S.hrs,S.km);sv();rAll();if(logged)toast("📍 Lectura: "+S.hrs+"h / "+fN(v)+"km")}};
+
+// ===== FORMS =====
+function tgl(id,fill){const f=$(id);const opening=!f.classList.contains('on');f.classList.toggle('on');if(opening&&fill){if(id==='fLog'){$("lDate").value=td();$("lHrs").value=S.hrs;$("lKm").value=S.km;const sel=$("lSvc");sel.innerHTML='<option value="">— Tipo de servicio —</option>'+S.svcs.map(s=>'<option value="'+s.id+'">'+s.name+'</option>').join('')}if(id==='fMod'){$("mDate").value=td();$("mHrs").value=S.hrs;$("mKm").value=S.km}}}
+$("lSvc").onchange=function(){const s=S.svcs.find(x=>x.id===this.value);if(s)$("lTask").value=s.name};
+
+function addLog(){const task=$("lTask").value.trim(),hrs=parseFloat($("lHrs").value),km=parseFloat($("lKm").value)||S.km,date=$("lDate").value,notes=$("lNotes").value.trim(),sid=$("lSvc").value;if(!task||isNaN(hrs))return;S.logs.unshift({id:gid(),task,hours:hrs,km,date,notes,sid,ts:Date.now()});S.hrs=Math.max(S.hrs,hrs);S.km=Math.max(S.km,km);updateUsage(hrs,km,date);$("hrs").value=S.hrs;$("km").value=S.km;sv();$("fLog").classList.remove("on");["lTask","lHrs","lKm","lNotes"].forEach(i=>$(i).value="");$("lSvc").value="";rAll();toast("✓ Servicio registrado")}
+function doHecho(id){const svc=S.svcs.find(s=>s.id===id);if(!svc)return;S.logs.unshift({id:gid(),task:svc.name,hours:S.hrs,km:S.km,date:td(),notes:"Registro rápido",sid:svc.id,ts:Date.now()});updateUsage(S.hrs,S.km);sv();rAll();toast("✓ "+svc.name)}
+function delLog(id){S.logs=S.logs.filter(l=>l.id!==id);sv();rAll()}
+function addMod(){const name=$("mName").value.trim();if(!name)return;const hrs=parseFloat($("mHrs").value)||S.hrs,km=parseFloat($("mKm").value)||S.km,date=$("mDate").value,cost=parseFloat($("mCost").value)||0,notes=$("mNotes").value.trim();S.mods.unshift({id:gid(),name,hours:hrs,km,date,notes,cost,ts:Date.now()});updateUsage(hrs,km,date);sv();$("fMod").classList.remove("on");["mName","mHrs","mKm","mNotes","mCost"].forEach(i=>$(i).value="");rAll();toast("✓ Mejora registrada")}
+function delMod(id){S.mods=S.mods.filter(m=>m.id!==id);sv();rAll()}
+function addSvc(){const name=$("sName").value.trim(),h=parseFloat($("sInt").value),notes=$("sNotes").value.trim();if(!name||isNaN(h))return;S.svcs.push({id:gid(),name,h,notes});sv();$("fSvc").classList.remove("on");["sName","sInt","sNotes"].forEach(i=>$(i).value="");rCfg();toast("✓ Servicio agregado")}
+function delSvc(id){S.svcs=S.svcs.filter(s=>s.id!==id);sv();rCfg()}
+
+// ===== EXPORT / IMPORT =====
+function exportData(){const blob=new Blob([JSON.stringify(S,null,2)],{type:"application/json"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download="ec250-backup-"+td()+".json";a.click();URL.revokeObjectURL(url);toast("⬇ Backup descargado")}
+function importData(e){const file=e.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=function(ev){try{const d=JSON.parse(ev.target.result);if(!d.logs||!d.svcs)throw"invalid";S=d;if(!S.mods)S.mods=[];if(!S.usage)S.usage=[];if(S.km==null)S.km=0;sv();$("hrs").value=S.hrs;$("km").value=S.km;rAll();toast("✓ Backup restaurado")}catch{toast("✗ Archivo inválido")}};reader.readAsText(file);e.target.value=""}
+
+// ===== USAGE / LECTURAS =====
+function updateUsage(hrs,km,date){if(hrs==null||isNaN(hrs))return;date=date||td();km=km||0;const i=S.usage.findIndex(u=>u.date===date);if(i>=0){if(S.usage[i].hours===hrs&&S.usage[i].km===km)return false;S.usage[i]={...S.usage[i],hours:hrs,km:km,ts:Date.now()}}else{S.usage.push({id:gid(),date,hours:hrs,km:km,ts:Date.now()})}return true}
+function delUsage(id){if(!confirm("¿Borrar esta lectura?"))return;S.usage=S.usage.filter(u=>u.id!==id);sv();rAll()}
+function hsPerDay(){if(!S.usage||S.usage.length<2)return 0;const sr=[...S.usage].sort((a,b)=>new Date(a.date)-new Date(b.date));const f=sr[0],l=sr[sr.length-1];const dh=l.hours-f.hours;const dd=(new Date(l.date+"T12:00:00")-new Date(f.date+"T12:00:00"))/864e5;return dd>0?dh/dd:0}
+function hsPerDayRecent(nDays){if(!S.usage||S.usage.length<2)return 0;const cutoff=Date.now()-nDays*864e5;const sr=[...S.usage].filter(u=>new Date(u.date+"T12:00:00").getTime()>=cutoff).sort((a,b)=>new Date(a.date)-new Date(b.date));if(sr.length<2)return hsPerDay();const f=sr[0],l=sr[sr.length-1];const dh=l.hours-f.hours;const dd=(new Date(l.date+"T12:00:00")-new Date(f.date+"T12:00:00"))/864e5;return dd>0?dh/dd:0}
+function daysToH(targetH){const hpd=hsPerDayRecent(90)||hsPerDay();if(hpd<=0)return null;const rem=targetH-S.hrs;return rem<=0?0:Math.ceil(rem/hpd)}
+function fDays(d){if(d==null)return"";if(d===0)return"hoy";if(d<7)return"≈ "+d+"d";if(d<60)return"≈ "+Math.round(d/7)+"sem";if(d<365)return"≈ "+Math.round(d/30)+"m";return"≈ "+(d/365).toFixed(1)+"a"}
+
+// ===== RENDER =====
+function rAll(){rDash();rLog();rHist();rMods();rTq();rCodes();rInfo();rCfg()}
+function getLast(sid){const ls=S.logs.filter(l=>l.sid===sid);return ls.length?ls.reduce((a,b)=>a.hours>b.hours?a:b):null}
+
+function rDash(){
+  const ps=S.svcs.filter(s=>s.vis!==false).map(s=>{const l=getLast(s.id),lh=l?l.hours:0,nd=lh+s.h,rm=nd-S.hrs;return{...s,lh,nd,rm}}).sort((a,b)=>a.rm-b.rm);
+  const od=ps.filter(s=>s.rm<=0);const al=$("alrt");
+  if(od.length){al.style.display="block";al.textContent="⚠ "+od.length+" servicio"+(od.length>1?"s":"")+" vencido"+(od.length>1?"s":"")}else al.style.display="none";
+  const hidden=S.svcs.filter(s=>s.vis===false).length;
+  $("dashL").innerHTML=ps.map(s=>{const pct=Math.min(100,Math.max(0,((s.h-s.rm)/s.h)*100));const c=s.rm<=0?"od":s.rm<=5?"sn":"";const bt=s.rm<=0?"VENCIDO "+Math.abs(s.rm).toFixed(1)+"h":s.rm.toFixed(1)+"h";const days=daysToH(s.nd);const dStr=days!=null?fDays(days):"";
+  return'<div class="card '+c+'"><div class="ctop"><span class="cn">'+s.name+'</span><button class="btnh" style="background:var(--g);color:#fff" onclick="doHecho(\''+s.id+'\')">HECHO</button><span class="badge '+c+'">'+bt+'</span></div><div class="pbar"><div class="pfill '+c+'" style="width:'+pct+'%"></div></div><div style="display:flex;gap:8px;flex-wrap:wrap"><span class="det">Último: '+s.lh+'h</span><span class="det">Próximo: '+s.nd+'h</span><span class="det">Cada '+s.h+'h</span>'+(dStr&&s.rm>0?'<span class="det" style="color:#7ab">'+dStr+'</span>':'')+'</div></div>'}).join("")+(hidden?'<p style="font-size:10px;color:#555;text-align:center;margin-top:8px">'+hidden+' servicio'+(hidden>1?'s':'')+' oculto'+(hidden>1?'s':'')+' — editá en CONFIG</p>':'')}
+
+function rLog(){const L=$("logL");if(!S.logs.length){L.innerHTML='<div class="empty">🔧 Sin registros. Tocá +</div>';return}
+L.innerHTML=S.logs.slice(0,60).map(l=>'<div class="card"><div class="ctop"><span class="cn">'+l.task+'</span><button class="btnx" onclick="delLog(\''+l.id+'\')">✕</button></div><div class="chips">'+(l.hours!=null?'<span class="chip">'+l.hours+'h</span>':'')+(l.km?'<span class="chip">'+l.km+'km</span>':'')+'<span class="chip">'+fD(l.date)+'</span></div>'+(l.notes?'<p class="note">'+l.notes+'</p>':'')+'</div>').join("")}
+
+function rHist(){const H=$("histL");
+  const stats='<div style="display:flex;gap:5px;margin-bottom:12px"><div class="sbox"><div class="sn">'+S.logs.length+'</div><div class="sl">REGISTROS</div></div><div class="sbox"><div class="sn">'+S.hrs+'</div><div class="sl">HORAS</div></div><div class="sbox"><div class="sn">'+fN(S.km)+'</div><div class="sl">KM</div></div><div class="sbox"><div class="sn">'+(S.usage?S.usage.length:0)+'</div><div class="sl">LECTURAS</div></div></div>';
+  // Unificar todos los eventos con su tipo
+  const events=[];
+  S.logs.forEach(l=>events.push({...l,_t:'log'}));
+  S.mods.forEach(m=>events.push({...m,_t:'mod'}));
+  (S.usage||[]).forEach(u=>events.push({...u,_t:'usage',name:'Lectura: '+u.hours+'h'+(u.km?' / '+fN(u.km)+'km':'')}));
+  events.sort((a,b)=>new Date(b.date)-new Date(a.date));
+  const g={};events.forEach(e=>{const k=new Date(e.date+"T12:00:00").toLocaleDateString("es-AR",{month:"long",year:"numeric"}).toUpperCase();if(!g[k])g[k]=[];g[k].push(e)});
+  let h=stats;
+  if(!events.length){h+='<div class="empty">📋 Sin historial aún</div>';H.innerHTML=h;return}
+  Object.entries(g).forEach(([month,evs])=>{h+='<div style="margin-bottom:10px"><div style="font-size:10px;font-weight:700;color:#555;letter-spacing:2px;margin-bottom:4px;padding-bottom:3px;border-bottom:1px solid #1a1a1a">'+month+' ('+evs.length+')</div>';
+    evs.forEach(e=>{
+      if(e._t==='log'){h+='<div class="card red"><span class="cn">🔧 '+e.task+'</span><div class="chips"><span class="chip">'+e.hours+'h</span>'+(e.km?'<span class="chip">'+e.km+'km</span>':'')+'<span class="chip">'+fD(e.date)+'</span></div>'+(e.notes?'<p class="note">'+e.notes+'</p>':'')+'</div>'}
+      else if(e._t==='mod'){h+='<div class="card grn"><span class="cn" style="color:#00dd66">◆ '+e.name+'</span><div class="chips"><span class="chip">'+e.hours+'h</span>'+(e.km?'<span class="chip">'+e.km+'km</span>':'')+'<span class="chip">'+fD(e.date)+'</span>'+(e.cost?'<span class="chip">$'+fN(e.cost)+'</span>':'')+'</div>'+(e.notes?'<p class="note">'+e.notes+'</p>':'')+'</div>'}
+      else if(e._t==='usage'){h+='<div class="card" style="border-left-color:#2266aa;opacity:.85"><div class="ctop"><span class="cn" style="color:#7ab;font-size:12px">📍 '+e.name+'</span><button class="btnx" onclick="delUsage(\''+e.id+'\')">✕</button></div><div class="chips"><span class="chip">'+fD(e.date)+'</span></div></div>'}
+    });
+    h+='</div>'});
+  H.innerHTML=h}
+
+function rMods(){const M=$("modL");if(!S.mods.length){M.innerHTML='<div class="empty">◆ Sin modificaciones. Tocá +</div>';return}
+M.innerHTML=S.mods.map(m=>'<div class="card grn"><div class="ctop"><span class="cn" style="color:#00dd66">'+m.name+'</span><button class="btnx" onclick="delMod(\''+m.id+'\')">✕</button></div><div class="chips"><span class="chip">'+m.hours+'h</span>'+(m.km?'<span class="chip">'+m.km+'km</span>':'')+'<span class="chip">'+fD(m.date)+'</span>'+(m.cost?'<span class="chip">$'+fN(m.cost)+'</span>':'')+'</div>'+(m.notes?'<p class="note">'+m.notes+'</p>':'')+'</div>').join("")}
+
+let tqFv="all";
+function setTqF(f){tqFv=f;rTq()}
+function rTq(){const secs=Object.keys(TQ);const q=($("tqSearch").value||"").toLowerCase().trim();
+$("tqF").innerHTML=["all",...secs].map(f=>'<button class="fbtn '+(tqFv===f?"on":"")+'" onclick="setTqF(\''+f+'\')">'+(f==="all"?"TODOS":f.split("(")[0].trim().toUpperCase())+'</button>').join("");
+let count=0;
+$("tqL").innerHTML=secs.filter(s=>tqFv==="all"||tqFv===s).map(sec=>{
+const filtered=TQ[sec].filter(t=>{if(!q)return true;const hay=(t.p+' '+t.e+' '+t.s+' '+t.lc+' '+t.nm).toLowerCase();return hay.includes(q)});
+if(!filtered.length)return'';count+=filtered.length;
+return'<h3 class="tqS">'+sec.toUpperCase()+'</h3><div class="tqH"><span>COMPONENTE / PART</span><span style="text-align:center">Nm</span><span style="text-align:center">kgf·m</span><span style="text-align:center">ft·lb</span></div>'+filtered.map(t=>'<div class="tqR"><div style="font-size:11px;color:#ddd;line-height:1.35">'+t.p+'<span style="display:block;font-size:9px;color:#7ab;margin-top:1px;font-style:italic">'+t.e+'</span><span style="display:block;font-size:8px;color:#555;margin-top:1px">'+t.s+(t.lc?" · "+t.lc:"")+'</span></div><div class="tqV">'+t.nm+'</div><div class="tqV2">'+kgm(t.nm)+'</div><div class="tqV2">'+ftl(t.nm)+'</div></div>').join("")}).join("")+(q&&!count?'<div class="empty">Sin resultados para "'+q+'"</div>':'')}
+
+function rCodes(){const C=$("codesL");const q=(($("codeSearch")||{}).value||"").toLowerCase().trim();
+const filtered=CODES.filter(c=>{if(!q)return true;return(c.code+" "+c.flash+" "+c.component+" "+c.errors.join(" ")).toLowerCase().includes(q)});
+if(!filtered.length&&q){C.innerHTML='<div class="empty">Sin resultados para "'+q+'"</div>';return}
+C.innerHTML=filtered.map(c=>{
+const sev=c.code==="50"||c.code==="42"?"var(--w)":c.code==="37"||c.code==="41"?"var(--d)":"var(--b2)";
+return'<div class="card" style="border-left-color:'+sev+'"><div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="background:var(--r);color:#fff;font-family:\'Bebas Neue\',sans-serif;font-size:22px;padding:2px 10px;border-radius:4px;min-width:44px;text-align:center">'+c.code+'</span><div><span class="cn" style="display:block">'+c.component+'</span><span style="font-size:9px;color:#888">MIL: '+c.flash+'</span></div></div><div style="padding-left:4px">'+c.errors.map(e=>'<div style="font-size:11px;color:#ccc;padding:3px 0;border-bottom:1px solid #1a1a1a">⚠ '+e+'</div>').join("")+'</div></div>'}).join("")}
+
+function rInfo(){const I=$("infoL");
+  const hasUsage=S.usage&&S.usage.length>=2;
+  if(!S.logs.length&&!hasUsage){I.innerHTML='<div class="empty">📊 Registrá mantenimientos o actualizá horas para ver estadísticas</div>';return}
+  // Si hay lecturas, usarlas como fuente principal. Si no, fallback a logs
+  let first,last,days;
+  if(hasUsage){const sr=[...S.usage].sort((a,b)=>new Date(a.date)-new Date(b.date));first=new Date(sr[0].date+"T12:00:00");last=new Date(sr[sr.length-1].date+"T12:00:00");days=Math.max(1,Math.ceil((last-first)/(864e5)))}
+  else{const sorted=[...S.logs].sort((a,b)=>new Date(a.date)-new Date(b.date));first=new Date(sorted[0].date+"T12:00:00");last=new Date(sorted[sorted.length-1].date+"T12:00:00");days=Math.max(1,Math.ceil((last-first)/(864e5)))}
+  const months=Math.max(1,days/30.44);
+  const hpdAll=hsPerDay();
+  const hpdRecent=hsPerDayRecent(90);
+  const hpm=hpdAll>0?hpdAll*30.44:S.hrs/months;
+  const hpmRecent=hpdRecent>0?hpdRecent*30.44:hpm;
+  const hpy=hpm*12;
+  const kph=S.km&&S.hrs?(S.km/S.hrs):0;
+  // Próximo servicio
+  const ps=S.svcs.filter(s=>s.vis!==false).map(s=>{const l=getLast(s.id),lh=l?l.hours:0,nd=lh+s.h,rm=nd-S.hrs;return{...s,lh,nd,rm}}).filter(s=>s.rm>0).sort((a,b)=>a.rm-b.rm);
+  const next=ps[0];
+  const nextDays=next?daysToH(next.nd):null;
+  // Actividad mensual: lecturas O logs
+  const byM={};
+  const src=hasUsage?S.usage:S.logs;
+  src.forEach(e=>{const d=new Date(e.date+"T12:00:00");const k=d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0");if(!byM[k])byM[k]={c:0,h:0,lbl:d.toLocaleDateString("es-AR",{month:"short",year:"2-digit"})};byM[k].c++;if(e.hours)byM[k].h=Math.max(byM[k].h,e.hours)});
+  // Convertir a hs/mes reales si hay lecturas
+  const mKeys=Object.keys(byM).sort();
+  let mData;
+  if(hasUsage&&mKeys.length>=2){mData=mKeys.map((k,i)=>{const cur=byM[k].h;const prev=i>0?byM[mKeys[i-1]].h:cur;return{l:byM[k].lbl,c:Math.max(0,cur-prev)}})}
+  else{mData=mKeys.map(k=>({l:byM[k].lbl,c:byM[k].c}))}
+  const mx=Math.max(...mData.map(m=>m.c),1);
+  const totCost=S.mods.reduce((a,m)=>a+(m.cost||0),0);
+  let h='<div style="display:flex;gap:5px;margin-bottom:10px;flex-wrap:wrap"><div class="sbox"><div class="sn">'+hpm.toFixed(1)+'</div><div class="sl">HS/MES</div></div><div class="sbox"><div class="sn">'+hpy.toFixed(0)+'</div><div class="sl">HS/AÑO (PROY.)</div></div><div class="sbox"><div class="sn">'+kph.toFixed(1)+'</div><div class="sl">KM/HORA</div></div></div>';
+  h+='<div style="display:flex;gap:5px;margin-bottom:14px"><div class="sbox"><div class="sn">'+S.logs.length+'</div><div class="sl">SERVICIOS</div></div><div class="sbox"><div class="sn">'+S.mods.length+'</div><div class="sl">MEJORAS</div></div><div class="sbox"><div class="sn">'+(totCost>0?"$"+fN(totCost):"—")+'</div><div class="sl">INVERTIDO</div></div></div>';
+  // Próximo servicio destacado
+  if(next&&nextDays!=null){const fecha=new Date(Date.now()+nextDays*864e5);const fechaStr=fecha.toLocaleDateString("es-AR",{day:"2-digit",month:"short"});h+='<div style="background:linear-gradient(135deg,#1a0808,#0a0a0a);border:1px solid var(--r);border-radius:6px;padding:12px;margin-bottom:14px"><div style="font-size:9px;color:#888;letter-spacing:2px;margin-bottom:4px">PRÓXIMO SERVICIO</div><div style="font-family:\'Bebas Neue\',sans-serif;font-size:18px;color:#fff;line-height:1.2;margin-bottom:6px">'+next.name+'</div><div style="display:flex;gap:10px;flex-wrap:wrap;font-size:10px;color:#aaa"><span>en <strong style="color:var(--r)">'+next.rm.toFixed(1)+'h</strong></span><span>≈ <strong style="color:#7ab">'+nextDays+' día'+(nextDays!==1?'s':'')+'</strong></span><span>~ <strong>'+fechaStr+'</strong></span></div></div>'}
+  h+='<div class="st" style="font-size:11px;margin-bottom:8px">'+(hasUsage?'HORAS POR MES (REAL)':'ACTIVIDAD MENSUAL')+'</div><div style="background:var(--c1);border-radius:6px;padding:10px">';
+  mData.forEach(m=>{h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:5px"><span style="font-size:9px;color:#888;width:48px;text-align:right;flex-shrink:0">'+m.l+'</span><div style="flex:1;background:var(--b1);border-radius:2px;height:14px;overflow:hidden;position:relative"><div class="bar" style="width:'+(m.c/mx*100)+'%;height:100%"></div><span style="position:absolute;right:4px;top:1px;font-size:8px;color:#ddd;font-weight:700">'+(hasUsage?m.c.toFixed(1)+'h':m.c)+'</span></div></div>'});
+  h+='</div>';
+  h+='<div style="margin-top:14px;background:var(--c1);border-radius:6px;padding:10px"><div style="font-size:10px;font-weight:700;color:#888;margin-bottom:6px;letter-spacing:1px">RESUMEN</div><p style="font-size:10px;color:#aaa;line-height:1.6">La moto lleva <strong style="color:var(--r)">'+S.hrs+'h</strong> y <strong style="color:var(--r)">'+fN(S.km)+' km</strong>'+(hasUsage?' con <strong>'+S.usage.length+' lecturas</strong>':' en <strong>'+Math.round(days)+' días</strong>')+' de tracking. Promedio: <strong>'+hpm.toFixed(1)+'h/mes</strong>'+(hasUsage&&Math.abs(hpmRecent-hpm)>0.5?' (últimos 90 días: <strong style="color:'+(hpmRecent>hpm?'#00dd66':'#ffaa00')+'">'+hpmRecent.toFixed(1)+'h/mes</strong>)':'')+'.'+(hpy>0?' Proyección anual: <strong>'+hpy.toFixed(0)+'h</strong>.':'')+(kph>0?' Ratio: <strong>'+kph.toFixed(1)+' km/h</strong> motor.':'')+(totCost>0?' Inversión mejoras: <strong>$'+fN(totCost)+'</strong>.':'')+'</p></div>';
+  I.innerHTML=h}
+
+function tglVis(id){const s=S.svcs.find(x=>x.id===id);if(s){s.vis=s.vis===false?true:false;sv();rCfg();rDash()}}
+function rCfg(){$("svcL").innerHTML=S.svcs.map(s=>{const vis=s.vis!==false;return'<div style="background:var(--c1);border-radius:6px;padding:8px 10px;margin-bottom:4px;opacity:'+(vis?'1':'.4')+'"><div style="display:flex;justify-content:space-between;align-items:center;gap:6px"><button class="btn-eye" onclick="tglVis(\''+s.id+'\')" title="'+(vis?'Ocultar del dashboard':'Mostrar en dashboard')+'">'+(vis?'👁':'👁‍🗨')+'</button><span class="cn">'+s.name+'</span><button class="btnx" onclick="delSvc(\''+s.id+'\')">✕</button></div><div class="chips"><span class="chip">Cada '+s.h+'h</span>'+(s.notes?'<span style="color:#888;font-size:9px">'+s.notes+'</span>':'')+'</div></div>'}).join("")}
+
+function rstC(){$("rstA").innerHTML='<div class="row"><button class="btnd" style="flex:1;background:var(--d);color:#000" onclick="doRst()">CONFIRMAR</button><button class="btnd" style="flex:1;background:#333" onclick="rstX()">CANCELAR</button></div>'}
+function rstX(){$("rstA").innerHTML='<button class="btnd" onclick="rstC()">RESETEAR TODO</button>'}
+function doRst(){S={hrs:0,km:0,logs:[],svcs:DSVC.map(s=>({...s})),mods:[],usage:[]};sv();$("hrs").value=0;$("km").value=0;rstX();rAll();toast("Datos reseteados")}
+
+// ===== PDF VIEWER =====
+function loadPdf(e){const file=e.target.files[0];if(!file)return;const url=URL.createObjectURL(file);$("pdfFrame").src=url;$("pdfName").textContent=file.name;$("pdfViewer").style.display="block";toast("📄 "+file.name+" cargado")}
+function closePdf(){$("pdfViewer").style.display="none";$("pdfFrame").src="";$("pdfFile").value=""}
+
+// ===== SYNC GITHUB =====
+// Sube todo S a datos/ec250.json en el repo privado (API de contenidos). Sin señal queda pendiente y reintenta.
+const GHK="ec250_gh",GHPATH="datos/ec250.json";
+let GH=(()=>{try{return JSON.parse(localStorage.getItem(GHK))||{}}catch{return{}}})(),ghT=null,ghBusy=false;
+function ghSt(m){const e=$("ghStat");if(e)e.textContent=m}
+function ghSaveG(){try{localStorage.setItem(GHK,JSON.stringify(GH))}catch{}}
+function ghOn(){return GH.repo&&GH.tok}
+function ghApi(method,body){return fetch("https://api.github.com/repos/"+GH.repo+"/contents/"+GHPATH,{method,cache:"no-store",headers:{Authorization:"Bearer "+GH.tok,Accept:"application/vnd.github+json"},body:body&&JSON.stringify(body)})}
+function b64e(s){return btoa(unescape(encodeURIComponent(s)))}
+function b64d(s){return decodeURIComponent(escape(atob(s.replace(/\n/g,""))))}
+function ghQueue(){if(!ghOn())return;GH.dirty=true;ghSaveG();ghSt("⏳ Cambios pendientes de subir…");clearTimeout(ghT);ghT=setTimeout(ghPush,1500)}
+async function ghPush(){if(!ghOn()||!GH.dirty||ghBusy)return;if(!navigator.onLine){ghSt("📴 Sin señal: se sube cuando vuelva");return}
+  ghBusy=true;try{let r=await ghApi("GET");const cur=r.ok?await r.json():null;if(!r.ok&&r.status!==404)throw r.status;
+    const body={message:"App: "+new Date().toLocaleString("es-AR")+" · "+S.hrs+" h",content:b64e(JSON.stringify(S,null,2))};if(cur)body.sha=cur.sha;
+    r=await ghApi("PUT",body);if(!r.ok)throw r.status;GH.dirty=false;GH.last=Date.now();ghSaveG();ghSt("✓ Subido "+new Date().toLocaleTimeString("es-AR"))}
+  catch(e){ghSt("✗ No se pudo subir ("+e+"). "+(e===401||e===403||e===404?"Revisá repo y token.":"Reintento más tarde."))}finally{ghBusy=false}}
+async function ghPull(manual){if(!ghOn()){if(manual)toast("Configurá repo y token");return}
+  try{const r=await ghApi("GET");if(r.status===404){if(manual)toast("El repo todavía no tiene datos");return}if(!r.ok)throw r.status;
+    const d=JSON.parse(b64d((await r.json()).content));if(!d.logs||!d.svcs)throw"inválido";
+    if(!manual&&(d.ts||0)<=(S.ts||0))return;if(manual&&!confirm("¿Reemplazar los datos de este celular por los del repo?"))return;
+    S=d;try{localStorage.setItem(KEY,JSON.stringify(S))}catch{}ld();rAll();GH.dirty=false;ghSaveG();ghSt("✓ Bajado del repo");if(manual)toast("✓ Datos del repo cargados")}
+  catch(e){ghSt("✗ No se pudo bajar ("+e+")")}}
+function ghSaveCfg(){GH.repo=$("ghRepo").value.trim();const t=$("ghTok").value.trim();if(t)GH.tok=t;ghSaveG();$("ghTok").value="";if(!ghOn()){ghSt("Falta repo o token");return}GH.dirty=true;ghPush()}
+window.addEventListener("online",ghPush);
+document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")ghPush()});
+
+ld();rAll();
+$("ghRepo").value=GH.repo||"";if(ghOn())ghSt(GH.dirty?"⏳ Cambios pendientes":"✓ Configurado"+(GH.last?" · último envío "+new Date(GH.last).toLocaleString("es-AR"):""));
+if(ghOn())ghPull(false).then(ghPush);
+if("serviceWorker" in navigator&&location.protocol==="https:")navigator.serviceWorker.register("sw.js");
+</script>
+</body>
+</html>
