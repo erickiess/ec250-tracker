@@ -1,5 +1,5 @@
 // Cache de la app para que ande sin señal. Al cambiar la app, subir VER.
-const VER = "ec250-v3";
+const VER = "ec250-v4";
 const FILES = ["./", "./index.html", "./manifest.json", "./icon.svg", "./icon-192.png", "./icon-512.png", "./moto.webp"];
 
 self.addEventListener("install", e => {
