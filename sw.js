@@ -1,6 +1,6 @@
 // Cache de la app para que ande sin señal. Al cambiar la app, subir VER.
-const VER = "ec250-v5";
-const FILES = ["./", "./index.html", "./manifest.json", "./icon.svg", "./icon-192.png", "./icon-512.png", "./moto.webp"];
+const VER = "ec250-v6";
+const FILES = ["./", "./index.html", "./manifest.json", "./icon-192.png", "./icon-512.png", "./moto.webp"];
 
 self.addEventListener("install", e => {
   e.waitUntil(caches.open(VER).then(c => c.addAll(FILES)));
